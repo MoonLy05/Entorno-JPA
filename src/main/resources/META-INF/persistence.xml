@@ -10,6 +10,7 @@
         <class>com.dogocorp.jpa.model.pagos.PagoTarjeta</class>
         <class>com.dogocorp.jpa.model.pagos.PagoEfectivo</class>
         <class>com.dogocorp.jpa.model.pagos.DetallePago</class>
+        <class>com.dogocorp.jpa.model.pagos.CorteCaja</class>
         <class>com.dogocorp.jpa.model.citas.Cita</class>
 
         <properties>

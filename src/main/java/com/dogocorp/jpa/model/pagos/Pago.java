@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "pagos")
 public class Pago {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,6 +22,10 @@ public class Pago {
     @JoinColumn(name = "detalle_id", nullable = false)
     private DetallePago detallePago;
 
+    @ManyToOne
+    @JoinColumn(name = "corte_caja_id", nullable = true)
+    private CorteCaja corteCaja;
+
     public Pago(){}
 
     public Pago(BigDecimal monto, LocalDateTime fechaPago, DetallePago detallePago) {
@@ -29,6 +34,10 @@ public class Pago {
         this.detallePago = detallePago;
     }
 
+    public Long getId() {
+            return id;
+    }
+        
     public BigDecimal getMonto() {
         return monto;
     }
@@ -41,8 +50,8 @@ public class Pago {
         return detallePago;
     }
 
-    public Long getId() {
-        return id;
+    public CorteCaja getCorteCaja() {
+        return corteCaja;
     }
 
     public void setMonto(BigDecimal monto) {
@@ -55,5 +64,9 @@ public class Pago {
 
     public void setDetallePago(DetallePago detallePago) {
         this.detallePago = detallePago;
+    }
+
+    public void setCorteCaja(CorteCaja corteCaja) {
+        this.corteCaja = corteCaja;
     }
 }

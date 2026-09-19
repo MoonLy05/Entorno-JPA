@@ -1,8 +1,10 @@
 package com.dogocorp.jpa;
 
 import com.dogocorp.jpa.model.citas.Cita;
+import com.dogocorp.jpa.model.pagos.CorteCaja;
 import com.dogocorp.jpa.model.pagos.Pago;
 import com.dogocorp.jpa.model.pagos.PagoTarjeta;
+import com.dogocorp.jpa.model.pagos.TipoCorteEnum;
 import com.dogocorp.jpa.model.pagos.PagoEfectivo;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -35,6 +37,23 @@ public class App {
         em.persist(pagoEfectivo);
         em.getTransaction().commit();
 
+
+        em.getTransaction().begin();
+        CorteCaja corteCaja = new CorteCaja();
+        corteCaja.setFechaCorte(LocalDateTime.now());
+        corteCaja.setTipoCorte(TipoCorteEnum.X);
+        pago.setCorteCaja(corteCaja);
+        pagoEfectivo.setCorteCaja(corteCaja);
+        
+        em.persist(corteCaja);
+        em.getTransaction().commit();
+
+        System.out.println("Pagos en memoria (antes de refrescar): " + corteCaja.getPagos().size());
+        
+        em.refresh(corteCaja);
+        
+        System.out.println("Pagos después de refresh: " + corteCaja.getPagos().size());
+        
         em.close();
         emf.close();
     }
