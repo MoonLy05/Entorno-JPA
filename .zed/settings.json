@@ -1,0 +1,28 @@
+{
+  "lsp": {
+    "jdtls": {
+      "initialization_options": {
+        "settings": {
+          "java": {
+            "configuration": {
+              "updateBuildConfiguration": "automatic"
+            },
+            "saveActions": {
+              "organizeImports": true
+            },
+            "inlayHints": {
+              "parameterNames": {
+                "enabled": "all"
+              }
+            },
+            "errors": {
+              "incompleteClasspath": {
+                "severity": "warning"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
