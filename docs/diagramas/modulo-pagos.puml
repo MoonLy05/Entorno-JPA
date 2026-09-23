@@ -1,0 +1,45 @@
+@startuml ModuloPagos
+
+abstract class DetallePago {
+  -Long id
+  +getId(): Long
+}
+
+class PagoTarjeta {
+  -String ultimosDigitos
+}
+
+class PagoEfectivo
+
+class PagoTransferencia {
+  -String referencia
+}
+
+class Pago {
+  -Long id
+  -BigDecimal monto
+  -LocalDateTime fechaPago
+}
+
+class CorteCaja {
+  -Long id
+  -TipoCorteEnum tipoCorte
+  -LocalDateTime fechaCorte
+  -List<Pago> pagos
+}
+
+enum TipoCorteEnum {
+  X
+  Z
+}
+
+DetallePago <|-- PagoTarjeta
+DetallePago <|-- PagoEfectivo
+DetallePago <|-- PagoTransferencia
+
+Pago "1" --> "1" DetallePago : detalle\n(@OneToOne, cascade=ALL)
+Pago "*" --> "0..1" CorteCaja : corteCaja\n(@ManyToOne, nullable)
+CorteCaja "1" --> "*" Pago : pagos\n(mappedBy, solo lectura)
+CorteCaja --> TipoCorteEnum : tipoCorte
+
+@enduml
